@@ -2,7 +2,6 @@
 FROM node:19-alpine AS base
 WORKDIR /app
 COPY package*.json ./
-COPY *env ./
 
 # ---- Dependencies ----
 FROM base AS dependencies
@@ -22,7 +21,6 @@ COPY --from=build /app/public ./public
 COPY --from=build /app/package*.json ./
 COPY --from=build /app/next.config.js ./next.config.js
 COPY --from=build /app/next-i18next.config.js ./next-i18next.config.js
-COPY --from=build /app/*env ./
 
 # Expose the port the app will run on
 EXPOSE 3000
