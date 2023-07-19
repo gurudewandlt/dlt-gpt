@@ -76,6 +76,10 @@ const Home = ({
 
   const stopConversationRef = useRef<boolean>(false);
 
+  // FETCH MODELS ----------------------------------------------
+
+  // ! commented out as our Azure APIs currently do not have an endpoint to return all available models
+  /* 
   const { data, error, refetch } = useQuery(
     ['GetModels', apiKey, serverSideApiKeyIsSet],
     ({ signal }) => {
@@ -97,7 +101,7 @@ const Home = ({
 
   useEffect(() => {
     dispatch({ field: 'modelError', value: getModelsError(error) });
-  }, [dispatch, error, getModelsError]);
+  }, [dispatch, error, getModelsError]); */
 
   // FETCH MODELS ----------------------------------------------
 
@@ -360,8 +364,8 @@ const Home = ({
       }}
     >
       <Head>
-        <title>Gov Chat</title>
-        <meta name="description" content="ChatGPT but better." />
+        <title>DeloitteGPT</title>
+        <meta name="description" content="ChatGPT for Deloitte powered by the AI Institute." />
         <meta
           name="viewport"
           content="height=device-height ,width=device-width, initial-scale=1, user-scalable=no"
@@ -385,6 +389,8 @@ const Home = ({
             <div className="flex flex-1">
               <Chat stopConversationRef={stopConversationRef} />
             </div>
+
+            { false && <Promptbar />}
 
           </div>
         </main>

@@ -16,6 +16,7 @@ import { Prompt } from '@/types/prompt';
 
 import { PromptList } from './PromptList';
 import { VariableModal } from './VariableModal';
+import { errorToast } from '@/pages/_app';
 
 interface Props {
   conversation: Conversation;
@@ -49,7 +50,7 @@ export const SystemPrompt: FC<Props> = ({
     const maxLength = conversation.model.maxLength;
 
     if (value.length > maxLength) {
-      alert(
+      errorToast(
         t(
           `Prompt limit is {{maxLength}} characters. You have entered {{valueLength}} characters.`,
           { maxLength, valueLength: value.length },

@@ -27,6 +27,7 @@ import HomeContext from '@/pages/api/home/home.context';
 import { PluginSelect } from './PluginSelect';
 import { PromptList } from './PromptList';
 import { VariableModal } from './VariableModal';
+import { errorToast } from '@/pages/_app';
 
 interface Props {
   onSend: (message: Message, plugin: Plugin | null) => void;
@@ -74,7 +75,7 @@ export const ChatInput = ({
     const maxLength = selectedConversation?.model.maxLength;
 
     if (maxLength && value.length > maxLength) {
-      alert(
+      errorToast(
         t(
           `Message limit is {{maxLength}} characters. You have entered {{valueLength}} characters.`,
           { maxLength, valueLength: value.length },
@@ -93,7 +94,7 @@ export const ChatInput = ({
     }
 
     if (!content) {
-      alert(t('Please enter a message'));
+      errorToast(t('Please enter a message'));
       return;
     }
 
@@ -378,6 +379,20 @@ export const ChatInput = ({
             />
           )}
         </div>
+      </div>
+      <div className="px-3 pt-2 pb-3 text-center text-[12px] text-black/50 dark:text-white/50 md:px-4 md:pt-3 md:pb-6">
+        <a
+          href="https://resources.deloitte.com/sites/NWE-Shared/documentsdbs/chatgpt-and-ai-guidance.pdf"
+          target="_blank"
+          rel="noreferrer"
+          className="underline"
+        >
+          Deloitte GPT
+        </a>
+        .{' '}
+        {t(
+          "Deloitte GPT is an advanced chatbot kit for OpenAI's chat models aiming to mimic ChatGPT's interface and functionality.",
+        )}
       </div>
     </div>
   );

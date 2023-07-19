@@ -1,6 +1,7 @@
 import { IconFolderPlus, IconMistOff, IconPlus } from '@tabler/icons-react';
 import { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
+import Image from 'next/image'
 
 import {
   CloseSidebarButton,
@@ -110,8 +111,11 @@ const Sidebar = <T,>({
             </div>
           )}
         </div>
+        {side === 'left' ? <Image className="logo" src="/deloitte_logo_white.png" width={500} height={200} alt="Deloitte logo"/> :null}
         {footerComponent}
       </div>
+      
+      
 
       <CloseSidebarButton onClick={toggleOpen} side={side} />
     </div>

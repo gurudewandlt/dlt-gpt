@@ -1,6 +1,7 @@
 import { FC, MutableRefObject } from 'react';
 
 import { Prompt } from '@/types/prompt';
+import { OpenAIModelID } from '@/types/openai';
 
 interface Props {
   prompts: Prompt[];
@@ -17,6 +18,7 @@ export const PromptList: FC<Props> = ({
   onMouseOver,
   promptListRef,
 }) => {
+
   return (
     <ul
       ref={promptListRef}

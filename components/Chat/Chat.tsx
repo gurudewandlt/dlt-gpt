@@ -9,6 +9,8 @@ import {
   useState,
 } from 'react';
 import toast from 'react-hot-toast';
+import { errorToast } from '@/pages/_app';
+
 
 import { useTranslation } from 'next-i18next';
 
