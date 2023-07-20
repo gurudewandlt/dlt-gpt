@@ -289,7 +289,7 @@ export const ChatInput = ({
             {plugin ? <IconBrandGoogle size={20} /> : <IconBolt size={20} />}
           </button>
 
-          {showPluginSelect && (
+          {showPluginSelect && false && ( // NOTE: disables showing the plugin select
             <div className="absolute left-0 bottom-14 rounded bg-white dark:bg-[#343541]">
               <PluginSelect
                 plugin={plugin}
@@ -387,11 +387,11 @@ export const ChatInput = ({
           rel="noreferrer"
           className="underline"
         >
-          Deloitte GPT
+          Deloitte GPT Policy
         </a>
         .{' '}
         {t(
-          "Deloitte GPT is an advanced chatbot kit for OpenAI's chat models aiming to mimic ChatGPT's interface and functionality.",
+          "Deloitte GPT is your Chat GPT assistant, personalised for Deloitte usage.",
         )}
       </div>
     </div>

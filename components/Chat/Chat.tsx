@@ -351,42 +351,52 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
 
   return (
     <div className="relative flex-1 overflow-hidden bg-white dark:bg-[#343541]">
-      {!(apiKey || serverSideApiKeyIsSet) ? (
+      {selectedConversation?.messages.length == 0 && (
         <div className="mx-auto flex h-full w-[300px] flex-col justify-center space-y-6 sm:w-[600px]">
           <div className="text-center text-4xl font-bold text-black dark:text-white">
-            Welcome to Gov Chat
+            Welcome to Deloitte GPT
           </div>
           <div className="text-center text-lg text-black dark:text-white">
-            <div className="mb-8">{`Gov Chat is an open source clone of OpenAI's ChatGPT UI.`}</div>
+            <div className="mb-8">Deloitte GPT is your Chat GPT assistant, personalised for Deloitte usage.</div>
           </div>
+          <div className="flex flex-col space-y-4 rounded-lg border border-neutral-200 p-4 dark:border-neutral-600">
+            <ModelSelect />
+
+            <TemperatureSlider
+              label={t('Temperature')}
+              onChangeTemperature={(temperature) =>
+                handleUpdateConversation(selectedConversation, {
+                  key: 'temperature',
+                  value: temperature,
+                })
+              }
+            />
+
+          </div>
+
+          <br/>
+
           <div className="text-center text-gray-500 dark:text-gray-400">
             <div className="mb-2">
-              Gov Chat allows you to plug in your API key to use this UI with
-              Azure OpenAI. No warranty is provided.
-            </div>
-            <div className="mb-2">
-              It is <span className="italic">only</span> used to communicate
-              with their Azure OpenAI.
-            </div>
-            <div className="mb-2">
-              {t(
-                'Please set your OpenAI API key in the bottom left of the sidebar.',
-              )}
-            </div>
-            <div>
-              {t("If you don't have an OpenAI API key, you can get one here: ")}
+              {"Only use Deloitte GPT for firm-related use. Follow our core values, our client's policies & remain ethical while using this tool.  Be careful with sensitive client & data. Your usage is monitored for auditing purposes."} Read our full policy {" "}
               <a
-                href="https://platform.openai.com/account/api-keys"
-                target="_blank"
-                rel="noreferrer"
-                className="text-blue-500 hover:underline"
+              href="https://resources.deloitte.com/sites/NWE-Shared/documentsdbs/chatgpt-and-ai-guidance.pdf"
+              target="_blank"
+              rel="noreferrer"
+              className="underline"
               >
-                openai.com
-              </a>
+                here
+              </a>.
             </div>
+            <br/>
+
+          </div>
+          <div className="text-center text-white">
+            Made at the <span class="font-bold">AI Institute</span>.
           </div>
         </div>
-      ) : modelError ? (
+      )} 
+      {modelError ? (
         <ErrorMessageDiv error={modelError} />
       ) : (
         <>
@@ -400,17 +410,16 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                 <div className="mx-auto flex flex-col space-y-5 md:space-y-10 px-3 pt-5 md:pt-12 sm:max-w-[600px]">
                   <div className="text-center text-3xl font-semibold text-gray-800 dark:text-gray-100">
                     {models.length === 0 ? (
-                      <div>
-                        <Spinner size="16px" className="mx-auto" />
-                      </div>
+                      '' // add intro text here?
                     ) : (
-                      'Gov Chat'
+                      <div>
+                        { false && <Spinner size="16px" className="mx-auto" /> }
+                      </div>
                     )}
                   </div>
 
-                  {models.length > 0 && (
+                  {selectedConversation?.messages.length === 0 && (
                     <div className="flex h-full flex-col space-y-4 rounded-lg border border-neutral-200 p-4 dark:border-neutral-600">
-                      <ModelSelect />
 
                       <SystemPrompt
                         conversation={selectedConversation}
@@ -423,15 +432,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                         }
                       />
 
-                      <TemperatureSlider
-                        label={t('Temperature')}
-                        onChangeTemperature={(temperature) =>
-                          handleUpdateConversation(selectedConversation, {
-                            key: 'temperature',
-                            value: temperature,
-                          })
-                        }
-                      />
+
                     </div>
                   )}
                 </div>

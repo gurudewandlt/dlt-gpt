@@ -364,7 +364,7 @@ const Home = ({
       }}
     >
       <Head>
-        <title>DeloitteGPT</title>
+        <title>Deloitte GPT</title>
         <meta name="description" content="ChatGPT for Deloitte powered by the AI Institute." />
         <meta
           name="viewport"
@@ -390,7 +390,7 @@ const Home = ({
               <Chat stopConversationRef={stopConversationRef} />
             </div>
 
-            { false && <Promptbar />}
+            { true && <Promptbar />}
 
           </div>
         </main>

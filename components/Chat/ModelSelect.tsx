@@ -26,6 +26,9 @@ export const ModelSelect = () => {
       });
   };
 
+  let constModels = [{id: "GPT-3.5-turbo", name: "GPT-3.5"}]
+  // TODO: replace with API fetch and change constModels back to models state
+
   return (
     <div className="flex flex-col">
       <label className="mb-2 text-left text-neutral-700 dark:text-neutral-400">
@@ -38,7 +41,7 @@ export const ModelSelect = () => {
           value={selectedConversation?.model?.id || defaultModelId}
           onChange={handleChange}
         >
-          {models.map((model) => (
+          {constModels.map((model) => (
             <option
               key={model.id}
               value={model.id}
